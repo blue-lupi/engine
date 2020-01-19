@@ -165,6 +165,7 @@ class HomePage(Page):
     privacy = RichTextField(null=True, blank=False)
     shipping = RichTextField(null=True, blank=False)
     gtc = RichTextField(null=True, blank=False)
+    cancellation_policy = RichTextField(null=True, blank=False)
 
     sociallinks = StreamField([
         ('link', blocks.URLBlock(help_text="Important! Format https://www.domain.tld/xyz"))
@@ -240,6 +241,7 @@ class HomePage(Page):
             FieldPanel('privacy'),
             FieldPanel('shipping'),
             FieldPanel('gtc'),
+            FieldPanel('cancellation_policy'),
             ],
             heading="terms",
         )
