@@ -164,6 +164,7 @@ class HomePage(Page):
     about = RichTextField(null=True, blank=False)
     privacy = RichTextField(null=True, blank=False)
     shipping = RichTextField(null=True, blank=False)
+    gtc = RichTextField(null=True, blank=False)
 
     sociallinks = StreamField([
         ('link', blocks.URLBlock(help_text="Important! Format https://www.domain.tld/xyz"))
@@ -238,6 +239,7 @@ class HomePage(Page):
             FieldPanel('about'),
             FieldPanel('privacy'),
             FieldPanel('shipping'),
+            FieldPanel('gtc'),
             ],
             heading="terms",
         )
