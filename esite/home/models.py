@@ -235,9 +235,9 @@ class HomePage(Page):
         MultiFieldPanel(
             [
             FieldPanel('about'),
-            FieldPanel('privacy')
+            FieldPanel('privacy'),
             ],
-            heading="privacy",
+            heading="terms",
         )
     ]
 
