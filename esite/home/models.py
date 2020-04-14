@@ -139,7 +139,7 @@ class _S_FAQBlock(blocks.StructBlock):
     header = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="Bold header text")
     questions = blocks.StreamBlock([
         ('question', FAQ_QuestionBlock(null=True, blank=False))
-    ], null=True, blank=False, max_num=4)
+    ], null=True, blank=False)
 
 #> Homepage
 class HomePage(Page):
