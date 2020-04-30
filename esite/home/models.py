@@ -256,3 +256,5 @@ class HomePage(Page):
         ObjectList(imprint_panels, heading='Imprint'),
         ObjectList(Page.promote_panels + token_panel + Page.settings_panels, heading='Settings', classname="settings")
     ])
+
+    preview_modes = []

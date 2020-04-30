@@ -107,3 +107,4 @@ class SurveyFormPage(AbstractEmailForm):
         
         send_mail(self.subject, f"{emailheader}\n\n{content}", addresses, self.from_address)
         
+    preview_modes = []

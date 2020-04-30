@@ -199,5 +199,7 @@ class RegistrationFormPage(AbstractEmailForm):
         if self.to_address:
             self.send_mail(form)
 
+    preview_modes = []
+
 class RegistrationFormSubmission(AbstractFormSubmission):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
