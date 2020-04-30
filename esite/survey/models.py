@@ -16,6 +16,7 @@ from wagtail.admin.edit_handlers import TabbedInterface, ObjectList, InlinePanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField, AbstractFormSubmission
 from wagtail.contrib.forms.models import AbstractForm, AbstractFormField, AbstractEmailForm, AbstractFormField, AbstractFormSubmission
 from wagtail.admin.utils import send_mail
+from wagtail.images.edit_handlers import ImageChooserPanel
 from esite.user.models import User
 
 # Create your registration related models here.
@@ -23,6 +24,32 @@ from esite.user.models import User
 
 class FormField(AbstractFormField):
     page = ParentalKey('SurveyFormPage', on_delete=models.CASCADE, related_name='form_fields')
+    title = models.CharField(null=True, blank=True, help_text="The title of the form field", max_length=255)
+    placeholder = models.CharField(
+        verbose_name='placeholder value',
+        max_length=255,
+        blank=True,
+        help_text='Placeholder value. Comma separated values supported for checkboxes.'
+    )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('label'),
+        FieldPanel('help_text'),
+        FieldPanel('required'),
+        FieldPanel('field_type', classname="formbuilder-type"),
+        ImageChooserPanel('image'),
+        FieldPanel('title'),
+        FieldPanel('choices', classname="formbuilder-choices"),
+        FieldPanel('placeholder'),
+        FieldPanel('default_value', classname="formbuilder-default"),
+    ]
 
 class SurveyFormPage(AbstractEmailForm):
     # When creating a new Form page in Wagtail
