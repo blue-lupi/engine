@@ -42,7 +42,8 @@ def _add_form(cls: Type[AbstractForm], node: str, dict_params: dict) -> Type[gra
         return list(FormField(name=field_.clean_name, field_type=field_.field_type,
                               label=field_.label, required=field_.required,
                               help_text=field_.help_text, choices=field_.choices,
-                              default_value=field_.default_value)
+                              default_value=field_.default_value, image=field_.image,
+                              title=field_.title, placeholder=field_.placeholder)
                     for field_ in self.form_fields.all())
 
     dict_params['resolve_form_fields'] = form_fields
