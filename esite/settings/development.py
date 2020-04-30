@@ -40,4 +40,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 BASE_URL = 'http://localhost:8000'
 
 # SPDX-License-Identifier: (EUPL-1.2)
-# Copyright © 2019 Werbeagentur Christian Aichner
+# Copyright © 2019-2020 Werbeagentur Christian Aichner

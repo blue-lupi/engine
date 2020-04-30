@@ -13,4 +13,4 @@ def global_admin_js():
     return format_html('<script src="{}"></script>', static("core/custom.js"))
 
 # SPDX-License-Identifier: (EUPL-1.2)
-# Copyright © 2019 Werbeagentur Christian Aichner
+# Copyright © 2019-2020 Werbeagentur Christian Aichner
