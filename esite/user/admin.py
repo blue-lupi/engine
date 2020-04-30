@@ -33,4 +33,4 @@ class CustomerAdminB(ModelAdminGroup):
         RegistrationAdmin
     )
 
-modeladmin_register(CustomerAdminB)
+#modeladmin_register(CustomerAdminB)
