@@ -314,8 +314,8 @@ if 'EMBEDLY_API_KEY' in env:
 
 # Settings for wagalytics
 # see https://github.com/tomdyson/wagalytics
-GA_VIEW_ID = env['WAGALYTICS_GA_VIEW_ID']
-GA_KEY_CONTENT = env['WAGALYTICS_GA_KEY_CONTENT']
+GA_VIEW_ID = env.get('WAGALYTICS_GA_VIEW_ID')
+GA_KEY_CONTENT = env.get('WAGALYTICS_GA_KEY_CONTENT')
 
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2019-2020 Werbeagentur Christian Aichner
