@@ -312,6 +312,10 @@ if 'EMBEDLY_API_KEY' in env:
 #    if 'CSP_OBJECT_SRC' in env:
 #        CSP_OBJECT_SRC = env.get('CSP_OBJECT_SRC').split(',')
 
+# Settings for wagalytics
+# see https://github.com/tomdyson/wagalytics
+GA_VIEW_ID = env['WAGALYTICS_GA_VIEW_ID']
+GA_KEY_CONTENT = env['WAGALYTICS_GA_KEY_CONTENT']
 
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2019-2020 Werbeagentur Christian Aichner

@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     #"grapple",
     "graphene_django",
     #"channels",
+    'wagalytics',
     'wagtailfontawesome',
 
     # Django core apps
