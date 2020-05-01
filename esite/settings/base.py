@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 """
 
 import os
+from datetime import timedelta
 
 env = os.environ.copy()
 
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     'esite.search',
     #'esite.utils',
     'esite.survey',
-
     'esite.colorfield',
 
     # Wagtail core apps
@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     #"channels",
     'wagalytics',
     'wagtailfontawesome',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 
     # Django core apps
     'django.contrib.admin',
@@ -222,6 +223,10 @@ GRAPHENE = {
 
 GRAPHQL_JWT = {
     'JWT_ALLOW_ARGUMENT': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LONG_RUNNING_REFRESH_TOKEN': True,
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=5),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 }
 
 GRAPPLE_APPS = {

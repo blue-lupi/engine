@@ -12,6 +12,7 @@ from graphene_django.converter import String
 from .relay import RelayMixin
 from .registry import registry
 from .actions import add_apps
+from .jwtauth.schema import ObtainJSONWebToken
 # add all the apps from the settings
 add_apps()
 # mixins
@@ -27,8 +28,6 @@ from .types import (  # noqa: E402
 )
 
 import graphql_jwt
-#import esite.charm.schema_relay
-#import esite.charm.schema
 import esite.registration.schema
 from esite.caching.schema import CacheUser
 
@@ -48,9 +47,8 @@ SettingsQueryMixin_ = SettingsQueryMixin()  # type: Any
 SnippetsQueryMixin_ = SnippetsQueryMixin()  # type: Any
 
 
-class Query(#esite.charm.schema.Query,
+class Query(
             esite.registration.schema.Query,
-            #esite.charm.schema_relay.RelayQuery,
             graphene.ObjectType,
             #AuthQueryMixin_,
             #DocumentQueryMixin_,
@@ -73,9 +71,10 @@ def mutation_parameters() -> dict:
     dict_params = {
         #'login': LoginMutation.Field(),
         #'logout': LogoutMutation.Field(),
-        'token_auth': graphql_jwt.ObtainJSONWebToken.Field(),
+        'token_auth': ObtainJSONWebToken.Field(),
         'verify_token': graphql_jwt.Verify.Field(),
         'refresh_token': graphql_jwt.Refresh.Field(),
+        'revoke_token': graphql_jwt.Revoke.Field(),
         'cache_user': CacheUser.Field(),
     }
     dict_params.update((camel_case_to_spaces(n).replace(' ', '_'), mut.Field())
