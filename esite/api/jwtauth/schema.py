@@ -23,4 +23,4 @@ class ObtainJSONWebToken(graphql_jwt.JSONWebTokenMutation):
 
     @classmethod
     def resolve(cls, root, info, **kwargs):
-        return cls(home=with_page_permissions(info.context, cls.query.specific()).live().first())
+        return cls(home=with_page_permissions(info.context, cls.query.specific).live().first())
