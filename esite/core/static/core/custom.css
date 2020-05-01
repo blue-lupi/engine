@@ -238,12 +238,13 @@ header {
   .dropdown ul a:hover {
     background-color: #1f4f80;
   }
-  
+  /*
   .icon-bin {
     background-color: #cd3238;
     border: 1px solid #cd3238;
   }
-  
+  */
+
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
  * Copyright © 2019-2020 Werbeagentur Christian Aichner
