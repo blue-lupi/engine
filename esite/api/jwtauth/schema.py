@@ -6,6 +6,7 @@ import graphql_jwt
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError
 
+from graphql.execution.base import ResolveInfo
 from ..types.core import Page
 
 from esite.api.permissions import with_page_permissions
@@ -19,8 +20,8 @@ from esite.api.permissions import with_page_permissions
 
 class ObtainJSONWebToken(graphql_jwt.JSONWebTokenMutation):
     home = graphene.Field(Page)
-    query = wagtailPage.objects.get(slug="home")
+    query = wagtailPage.objects.filter(slug="home")
 
     @classmethod
     def resolve(cls, root, info, **kwargs):
-        return cls(home=with_page_permissions(info.context, cls.query.specific).live().first())
+        return cls(home=with_page_permissions(info.context, cls.query.specific()).live().first())
