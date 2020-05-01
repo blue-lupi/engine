@@ -42,6 +42,7 @@ RUN echo "## Installing base ##" && \
 				pcre-dev \
 				postgresql-dev \
 				libjpeg-turbo-dev \
+				libffi-dev \
 				zlib-dev \
 				expat-dev \
 		;\
