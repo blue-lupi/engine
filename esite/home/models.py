@@ -63,7 +63,9 @@ class Why_ColumnBlock(blocks.StructBlock):
 class _S_WhyBlock(blocks.StructBlock):
     why_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="Bold header text")
     why_displayhead = blocks.BooleanBlock(null=True, blank=True, default=True, required=False, help_text="Whether or not to display the header")
-    why_Columns = blocks.ListBlock(Why_ColumnBlock(null=True, blank=False, icon='fa-columns'), null=True, blank=False)
+    why_Columns = blocks.StreamBlock([
+        ('why_Column', Why_ColumnBlock(null=True, blank=False, icon='fa-columns'))
+    ], null=True, blank=False, max_num=8)
 
 #> About Shop
 class Shop_PricingcardBlock(blocks.StructBlock):
@@ -88,7 +90,9 @@ class About_CardBlock(blocks.StructBlock):
 class _S_AboutBlock(blocks.StructBlock):
     about_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="Bold header text")
     about_displayhead = blocks.BooleanBlock(null=True, blank=True, default=True, required=False, help_text="Whether or not to display the header")
-    about_cards = blocks.ListBlock(About_CardBlock(null=True, blank=False, icon='fa-info'), null=True, blank=False)
+    about_cards = blocks.StreamBlock([
+        ('aboutcard', About_CardBlock(null=True, blank=False, icon='fa-info'))
+    ], null=True, blank=False, max_num=6)
 
 #> Instagram Section
 class _S_InstagramBlock(blocks.StructBlock):
@@ -105,7 +109,9 @@ class Steps_StepBlock(blocks.StructBlock):
 class _S_StepsBlock(blocks.StructBlock):
     steps_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="Bold header text")
     steps_displayhead = blocks.BooleanBlock(null=True, blank=True, default=True, required=False, help_text="Whether or not to display the header")
-    steps_steps = blocks.ListBlock(Steps_StepBlock(null=True, blank=False, icon='fa-list-ol'), null=True, blank=False)
+    steps_steps = blocks.StreamBlock([
+        ('step', Steps_StepBlock(null=True, blank=False, icon='fa-list-ol'))
+    ], null=True, blank=False, max_num=4)
 
 #> Trusted Section
 class Trusted_PartnerBlock(blocks.StructBlock):
@@ -113,10 +119,14 @@ class Trusted_PartnerBlock(blocks.StructBlock):
     partner_link = blocks.URLBlock(null=True, blank=True, help_text="Important! Format https://www.domain.tld/xyz")
 
 class _S_TrustedBlock(blocks.StructBlock):
-    trusted_partner = blocks.ListBlock(Trusted_PartnerBlock(null=True, blank=False, icon='fa-id-card'), null=True, blank=False)
+    trusted_partner = blocks.StreamBlock([
+        ('partner', Trusted_PartnerBlock(null=True, blank=False, icon='fa-id-card'))
+    ], null=True, blank=False, max_num=4)
 
 class _S_SmallTrustedBlock(blocks.StructBlock):
-    trusted_partner = blocks.ListBlock(Trusted_PartnerBlock(null=True, blank=False, icon='fa-id-badge'), null=True, blank=False)
+    trusted_partner = blocks.StreamBlock([
+        ('partner', Trusted_PartnerBlock(null=True, blank=False, icon='fa-id-badge'))
+    ], null=True, blank=False, max_num=4)
 
 #> Instagram Section
 class _S_WolfBlock(blocks.StructBlock):
@@ -132,7 +142,9 @@ class FAQ_QuestionBlock(blocks.StructBlock):
 
 class _S_FAQBlock(blocks.StructBlock):
     header = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="Bold header text")
-    questions = blocks.ListBlock(FAQ_QuestionBlock(null=True, blank=False, icon='fa-question'), null=True, blank=False)
+    questions = blocks.StreamBlock([
+        ('question', FAQ_QuestionBlock(null=True, blank=False, icon='fa-question'))
+    ], null=True, blank=False)
 
 #> Homepage
 class HomePage(Page):
