@@ -83,7 +83,6 @@ class _S_ShopBlock(blocks.StructBlock):
 
 #> About Section
 class About_CardBlock(blocks.StructBlock):
-    card_image = ImageChooserBlock(null=True, blank=False, help_text="Office-fitting image")
     card_head = blocks.CharBlock(null=True, blank=False, classname="full title", help_text="The bold header text at the frontpage slider")
     card_paragraph = blocks.RichTextBlock(null=True, blank=False, help_text="Formatted text", classname="full")
 
