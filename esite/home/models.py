@@ -51,6 +51,7 @@ class Button(models.Model):
 #> Header
 class _H_HeroBlock(blocks.StructBlock):
     slide_image = ImageChooserBlock(null=True, blank=False, help_text="Big, high resolution slider image")
+    slide_staticimage = blocks.BooleanBlock(null=True, blank=True, default=True, required=False, help_text="Whether or not to load the slide image from the CMS (Checked is better for performance, only uncheck if u want to test a new image)")
     slide_button = SnippetChooserBlock(Button, null=True, blank=True, required=False, help_text="The button displayed at the frontpage slider")
 
 #> Why Section
