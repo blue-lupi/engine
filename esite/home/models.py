@@ -195,10 +195,14 @@ class HomePage(Page):
         ('s_steps', _S_StepsBlock(null=True, blank=False, icon='fa-list-ol')),
         ('s_shop', _S_ShopBlock(null=True, blank=False, icon='home')),
         ('s_trusted', _S_TrustedBlock(null=True, blank=False, icon='fa-id-card-o')),
-        ('s_smalltrusted', _S_SmallTrustedBlock(null=True, blank=False, icon='fa-id-badge')),
         ('s_wolf', _S_WolfBlock(null=True, blank=False, icon='fa-coffee')),
         ('s_faq', _S_FAQBlock(null=True, blank=False, icon='fa-question')),
         ('code', blocks.RawHTMLBlock(null=True, blank=True, classname="full", icon='code'))
+    ], null=True, blank=False)
+
+    footers = StreamField([
+        ('f_partners', _S_SmallTrustedBlock(null=True, blank=False, icon='fa-id-badge')),
+        ('s_paymentmethods', _S_SmallTrustedBlock(null=True, blank=False, icon='fa-credit-card')),
     ], null=True, blank=False)
 
     token = models.CharField(null=True, blank=True, max_length=255)
@@ -210,7 +214,8 @@ class HomePage(Page):
 
     main_content_panels = [
         StreamFieldPanel('headers'),
-        StreamFieldPanel('sections')
+        StreamFieldPanel('sections'),
+        StreamFieldPanel('footers')
     ]
 
     imprint_panels = [
