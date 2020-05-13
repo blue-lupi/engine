@@ -128,6 +128,11 @@ class _S_SmallTrustedBlock(blocks.StructBlock):
         ('partner', Trusted_PartnerBlock(null=True, blank=True, icon='fa-id-badge'))
     ], null=True, blank=False, max_num=4)
 
+class _S_SmallTrustedPBlock(blocks.StructBlock):
+    trusted_paymentmethods = blocks.StreamBlock([
+        ('paymentmethods', Trusted_PartnerBlock(null=True, blank=True, icon='fa-id-badge'))
+    ], null=True, blank=False, max_num=4)
+
 #> Instagram Section
 class _S_WolfBlock(blocks.StructBlock):
     wolf_head = blocks.CharBlock(null=True, blank=False, classname="full", help_text="Bold header text")
@@ -202,7 +207,7 @@ class HomePage(Page):
 
     footers = StreamField([
         ('f_partners', _S_SmallTrustedBlock(null=True, blank=False, icon='fa-id-badge')),
-        ('s_paymentmethods', _S_SmallTrustedBlock(null=True, blank=False, icon='fa-credit-card')),
+        ('s_paymentmethods', _S_SmallTrustedPBlock(null=True, blank=False, icon='fa-credit-card')),
     ], null=True, blank=False)
 
     token = models.CharField(null=True, blank=True, max_length=255)
