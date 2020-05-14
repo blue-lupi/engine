@@ -131,7 +131,7 @@ class _S_SmallTrustedBlock(blocks.StructBlock):
 class _S_SmallTrustedPBlock(blocks.StructBlock):
     trusted_paymentmethods = blocks.StreamBlock([
         ('paymentmethods', Trusted_PartnerBlock(null=True, blank=True, icon='fa-id-badge'))
-    ], null=True, blank=False, max_num=4)
+    ], null=True, blank=False)
 
 #> Instagram Section
 class _S_WolfBlock(blocks.StructBlock):
