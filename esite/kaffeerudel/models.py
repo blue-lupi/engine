@@ -115,14 +115,73 @@ class _S_RatingsBlock(blocks.StructBlock):
     ratings_count = blocks.IntegerBlock(null=True, blank=False, required=False, help_text="How many ratings will be displayed")
 
 
+#> Trusted Section
+class Trusted_PartnerBlock(blocks.StructBlock):
+    partner_logo = ImageChooserBlock(null=True, blank=False, required=False, help_text="Image fitting this step")
+    partner_link = blocks.URLBlock(null=True, blank=False, required=False, help_text="Important! Format https://www.domain.tld/xyz")
+
+class _S_TrustedBlock(blocks.StructBlock):
+    trusted_partner = blocks.StreamBlock([
+        ('partner', Trusted_PartnerBlock(null=True, blank=True, required=True, icon='fa-id-card'))
+    ], null=True, required=False)
+
+class _S_SmallTrustedBlock(blocks.StructBlock):
+    trusted_partner = blocks.StreamBlock([
+        ('partner', Trusted_PartnerBlock(null=True, blank=True, required=True, icon='fa-id-badge'))
+    ], null=True, required=False)
+
+class _S_SmallTrustedPBlock(blocks.StructBlock):
+    trusted_paymentmethods = blocks.StreamBlock([
+        ('paymentmethods', Trusted_PartnerBlock(null=True, blank=True, required=True, icon='fa-id-badge'))
+    ], null=True, required=False)
+
+class _S_ShopBlock(blocks.StructBlock):
+    shop = blocks.StaticBlock(
+        admin_text=mark_safe('Insert this block in order to display the shop on your website.'),
+        null=True, blank=True, icon='fa-shopping-basket')
+
+
 #> Homepage
 class KaffeerudelPage(Page):
+    city = models.CharField(null=True, blank=False, max_length=255)
+    zip_code = models.CharField(null=True, blank=False, max_length=255)
+    address = models.CharField(null=True, blank=False, max_length=255)
+    telephone = models.CharField(null=True, blank=False, max_length=255)
+    telefax = models.CharField(null=True, blank=False, max_length=255)
+    vat_number = models.CharField(null=True, blank=False, max_length=255)
+    whatsapp_telephone = models.CharField(null=True, blank=True, max_length=255)
+    whatsapp_contactline = models.CharField(null=True, blank=True, max_length=255)
+    tax_id = models.CharField(null=True, blank=False, max_length=255)
+    trade_register_number = models.CharField(null=True, blank=False, max_length=255)
+    court_of_registry = models.CharField(null=True, blank=False, max_length=255)
+    place_of_registry = models.CharField(null=True, blank=False, max_length=255)
+    trade_register_number = models.CharField(null=True, blank=False, max_length=255)
+    ownership = models.CharField(null=True, blank=False, max_length=255)
+    email = models.CharField(null=True, blank=False, max_length=255)
+
+    copyrightholder = models.CharField(null=True, blank=False, max_length=255)
+
+    about = RichTextField(null=True, blank=False)
+    privacy = RichTextField(null=True, blank=False)
+    shipping = RichTextField(null=True, blank=False)
+    gtc = RichTextField(null=True, blank=False)
+    cancellation_policy = RichTextField(null=True, blank=False)
+
+    sociallinks = StreamField([
+        ('link', blocks.URLBlock(null=True, blank=False, help_text="Important! Format https://www.domain.tld/xyz"))
+    ], null=True, blank=False)
+
+    array = []
+    def sociallink_company(self):
+        for link in self.sociallinks:
+            self.array.append(str(link).split(".")[1])
+        return self.array
+
+
     sections = StreamField([
         ('s_head', _S_HeadBlock(null=True, blank=False, icon='fa-columns')),
         ('s_feature', _S_FeatureBlock(null=True, blank=False, icon='fa-info')),
-        ('s_shop', blocks.StaticBlock(
-            admin_text=mark_safe('Insert this block in order to display the shop on your website.'),
-            null=True, blank=True, icon='fa-shopping-basket')),
+        ('s_shop', _S_ShopBlock(null=True, blank=False, icon='fa-shopping-basket')),
         ('s_blue', _S_BlueBlock(null=True, blank=False, icon='home')),
         ('s_contentleft', _S_ContentLeftBlock(null=True, blank=False, icon='fa-align-center')),
         ('s_contentright', _S_ContentRightBlock(null=True, blank=False, icon='fa-align-center')),
@@ -133,6 +192,11 @@ class KaffeerudelPage(Page):
         # ('code', blocks.RawHTMLBlock(null=True, blank=True, classname="full", icon='code'))
     ], null=True, blank=False)
 
+    footers = StreamField([
+        ('f_partners', _S_SmallTrustedBlock(null=True, blank=False, icon='fa-id-badge')),
+        ('s_paymentmethods', _S_SmallTrustedPBlock(null=True, blank=False, icon='fa-credit-card')),
+    ], null=True, blank=False)
+
     token = models.CharField(null=True, blank=True, max_length=255)
 
     #graphql_fields = [
@@ -141,7 +205,48 @@ class KaffeerudelPage(Page):
     #]
 
     main_content_panels = [
-        StreamFieldPanel('sections')
+        StreamFieldPanel('sections'),
+        StreamFieldPanel('footers')
+    ]
+
+    imprint_panels = [
+        MultiFieldPanel(
+            [
+            FieldPanel('city'),
+            FieldPanel('zip_code'),
+            FieldPanel('address'),
+            FieldPanel('telephone'),
+            FieldPanel('telefax'),
+            FieldPanel('whatsapp_telephone'),
+            FieldPanel('whatsapp_contactline'),
+            FieldPanel('email'),
+            FieldPanel('copyrightholder')
+            ],
+            heading="contact",
+        ),
+        MultiFieldPanel(
+            [
+            FieldPanel('vat_number'),
+            FieldPanel('tax_id'),
+            FieldPanel('trade_register_number'),
+            FieldPanel('court_of_registry'),
+            FieldPanel('place_of_registry'),
+            FieldPanel('trade_register_number'),
+            FieldPanel('ownership')
+            ],
+            heading="legal",
+        ),
+        StreamFieldPanel('sociallinks'),
+        MultiFieldPanel(
+            [
+            FieldPanel('about'),
+            FieldPanel('privacy'),
+            FieldPanel('shipping'),
+            FieldPanel('gtc'),
+            FieldPanel('cancellation_policy'),
+            ],
+            heading="terms",
+        )
     ]
 
     token_panel = [
@@ -150,6 +255,7 @@ class KaffeerudelPage(Page):
 
     edit_handler = TabbedInterface([
         ObjectList(Page.content_panels + main_content_panels, heading='Main'),
+        ObjectList(imprint_panels, heading='Imprint'),
         ObjectList(Page.promote_panels + token_panel + Page.settings_panels, heading='Settings', classname="settings")
     ])
 
