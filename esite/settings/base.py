@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'esite.user',
     'esite.customer',
     'esite.home',
+    'esite.kaffeerudel',
     'esite.caching',
     'esite.navigation',
     'esite.search',
@@ -200,6 +201,7 @@ WAGTAILSEARCH_BACKENDS = {
 GRAPHQL_API = {
     'APPS': [
         'home',
+        'kaffeerudel',
         'registration',
         'survey',
     ],

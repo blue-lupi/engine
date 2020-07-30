@@ -23,11 +23,13 @@ from esite.api.permissions import with_page_permissions, with_collection_permiss
 class ObtainJSONWebToken(graphql_jwt.JSONWebTokenMutation):
     home = graphene.Field(Page)
     survey = graphene.Field(Page)
+    rudel = graphene.Field(Page)
 
     homequery = wagtailPage.objects.filter(slug="home")
     surveyquery = wagtailPage.objects.filter(slug="survey")
+    rudelquery = wagtailPage.objects.filter(slug="rudel")
     images = graphene.List(Image)
 
     @classmethod
     def resolve(cls, root, info, **kwargs):
-        return cls(home=with_page_permissions(info.context, cls.homequery.specific()).live().first(), survey=with_page_permissions(info.context, cls.surveyquery.specific()).live().first(), images=with_collection_permissions(info.context, gql_optimizer.query(wagtailImage.objects.all(), info)))
+        return cls(home=with_page_permissions(info.context, cls.homequery.specific()).live().first(), rudel=with_page_permissions(info.context, cls.rudelquery.specific()).live().first(), survey=with_page_permissions(info.context, cls.surveyquery.specific()).live().first(), images=with_collection_permissions(info.context, gql_optimizer.query(wagtailImage.objects.all(), info)))
