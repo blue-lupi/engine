@@ -113,7 +113,7 @@ MIDDLEWARE = [
     # According to the official documentation it should be listed underneath
     # SecurityMiddleware.
     # http://whitenoise.evans.io/en/stable/#quickstart-for-django-apps
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     # Django core middleware
     'django.middleware.security.SecurityMiddleware',
