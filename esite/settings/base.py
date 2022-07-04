@@ -293,7 +293,7 @@ STATICFILES_DIRS = [
 # and custom direcotires set in "STATICFILES_DIRS" when
 # using "django-admin collectstatic" command.
 # https://docs.djangoproject.com/en/stable/ref/settings/#static-root
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static-production')
 
 
 # This is the URL that will be used when serving static files, e.g.
