@@ -7,7 +7,7 @@ python manage.py migrate
 # python -m gunicorn francy.asgi:application -k uvicorn.workers.UvicornWorker
 
 uwsgi \
-    --socket=:$PORT \
+    --socket=127.0.0.1:$PORT \
     --buffer-size=32768 \
     --env UWSGI_WSGI_FILE=esite/wsgi_production.py \
     --processes=4 \
