@@ -190,7 +190,7 @@ DATABASES['default'].update(db_from_env)
 
 
 # Configure caches from cache url
-CACHES = {'default': django_cache_url.config()}
+CACHES = {'default': django_cache_url.config(env='REDIS_URL')}
 
 
 # Front-end cache
