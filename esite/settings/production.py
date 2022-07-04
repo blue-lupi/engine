@@ -320,5 +320,5 @@ GA_KEY_CONTENT = env.get('WAGALYTICS_GA_KEY_CONTENT')
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2019-2020 Werbeagentur Christian Aichner
 
-import django_heroku  # noqa E402
-django_heroku.settings(locals())
+# import django_heroku  # noqa E402
+# django_heroku.settings(locals())
