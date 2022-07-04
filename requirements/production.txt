@@ -14,7 +14,4 @@ elasticsearch==7.1.0
 uWSGI==2.0.18
 wagalytics==1.2
 pyOpenSSL==19.1.0
-uvicorn==0.15.0
-gunicorn==20.1.0
 django-heroku==0.3.1
-psycopg2==2.9.3
